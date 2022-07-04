@@ -1,7 +1,3 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
-/* eslint-disable prettier/prettier */
 /*
  Страница должна предварительно загрузить список городов из
  https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json
@@ -26,21 +22,22 @@
 
 /*
  homeworkContainer - это контейнер для всех ваших домашних заданий
- Если вы создаете новые html-элементы и добавляете их на страницу, то добавляйте их только в этот контейнер
+ Если вы создаете новые html-элементы и добавляете их на страницу, то дабавляйте их только в этот контейнер
 
  Пример:
    const newDiv = document.createElement('div');
    homeworkContainer.appendChild(newDiv);
  */
 
+import { loadAndSortTowns } from './functions';
 import './towns.html';
 
-const homeworkContainer = document.querySelector('#homeworkContainer');
+const homeworkContainer = document.querySelector('#homework-container');
 
 /*
  Функция должна вернуть Promise, который должен быть разрешен с массивом городов в качестве значения
 
- Массив городов можно получить отправив асинхронный запрос по адресу
+ Массив городов пожно получить отправив асинхронный запрос по адресу
  https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json
  */
 function loadTowns() {
@@ -75,6 +72,8 @@ const filterInput = homeworkContainer.querySelector('#filter-input');
 /* Блок с результатами поиска */
 const filterResult = homeworkContainer.querySelector('#filter-result');
 
+let towns = [];
+
 retryButton.addEventListener('click', () => {
   tryToLoad();
 });
@@ -82,6 +81,7 @@ retryButton.addEventListener('click', () => {
 filterInput.addEventListener('input', function () {
   updateFilter(this.value);
 });
+
 loadingFailedBlock.classList.add('hidden');
 filterBlock.classList.add('hidden');
 
